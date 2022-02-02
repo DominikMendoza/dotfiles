@@ -4,6 +4,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 picom --experimental-backends &
 redshift -PO 4700 -b 1 &
+#Esto es para la mona china
 feh --bg-fill ~/Descargas/mo.jpeg &
 bash ~/.config/polybar/launch.sh --forest &
 #$HOME/.config/polybar/launch.sh &
