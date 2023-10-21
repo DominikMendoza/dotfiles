@@ -1,13 +1,11 @@
 # terminal emulator
 super + Return
-	alacritty
+	kitty
 
 # program launcher
 super + @space
-	rofi -show run
+	rofi -show drun
 
-super + b
-	brave	
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
