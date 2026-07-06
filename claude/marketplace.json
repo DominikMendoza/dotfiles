@@ -1,0 +1,13 @@
+{
+  "name": "local",
+  "owner": {
+    "name": "Dominik"
+  },
+  "plugins": [
+    {
+      "name": "postman",
+      "source": "./postman-claude-code-plugin",
+      "description": "Full API lifecycle management for Claude Code. Powered by the Postman MCP Server."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "local": {
+      "source": {
+        "source": "directory",
+        "path": "$HOME/.claude/local-marketplace"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "postman@local": true
+  }
+}
