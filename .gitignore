@@ -1,0 +1,21 @@
+# Claude Code — runtime state and credentials, never versioned
+claude/.credentials.json
+claude/anthropic_key.sh
+claude/history.jsonl
+claude/settings.local.json
+claude/backups/
+claude/cache/
+claude/debug/
+claude/file-history/
+claude/ide/
+claude/local-marketplace/
+claude/paste-cache/
+claude/plans/
+claude/projects/
+claude/session-env/
+claude/sessions/
+claude/shell-snapshots/
+claude/skills/synced/
+claude/statsig/
+claude/tasks/
+claude/todos/

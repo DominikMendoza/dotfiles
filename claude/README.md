@@ -1,21 +1,24 @@
-# claude — Claude Code plugins
+# claude — Claude Code configuration
 
-Personal, user-scoped setup for Claude Code plugins (and their bundled MCP
-servers), installed so they load in **every** project without per-launch flags
-and without touching any work repo.
+Personal, user-scoped Claude Code setup: it loads in **every** project, with no
+per-launch flags and without touching any work repo.
 
-Documented plugin: **Postman**. The same pattern works for any Claude Code
-plugin that is a git repo with `.claude-plugin/plugin.json`.
+The files live here (versioned) and are **symlinked** into `~/.claude/`. Edit
+either side — it is the same file — and `git status` sees the change. No copying
+by hand.
 
 ## Contents
 
-| File                    | Purpose                                                              |
-| ----------------------- | ------------------------------------------------------------------- |
-| `install.sh`            | Bootstrap: sets up the marketplace, clones the plugin, merges keys.  |
-| `marketplace.json`      | Local marketplace manifest (symlinked into `~/.claude/`).            |
-| `settings.snippet.json` | Reference only — the keys `install.sh` merges into `settings.json`.  |
+| File / folder                   | Linked to                                       |
+| ------------------------------- | ----------------------------------------------- |
+| `settings.json`                 | `~/.claude/settings.json`                       |
+| `statusline-command.sh`         | `~/.claude/statusline-command.sh`               |
+| `skills/skill-template/`        | `~/.claude/skills/skill-template`               |
+| `agents/agent-template.md`      | `~/.claude/agents/agent-template.md`            |
+| `marketplace.json`              | `~/.claude/local-marketplace/.claude-plugin/`   |
+| `install.sh`                    | — (creates every link above)                    |
 
-The plugin's own code is **not** versioned here — `install.sh` clones it on demand.
+The Postman plugin's own code is **not** versioned: `install.sh` clones it.
 
 ## Install
 
@@ -23,62 +26,74 @@ The plugin's own code is **not** versioned here — `install.sh` clones it on de
 ./claude/install.sh
 ```
 
-Or call it from the top-level `install.sh`:
-
-```bash
-source "$DOTFILES/claude/install.sh"
-```
-
-It is idempotent (safe to re-run) and backs up `settings.json` to
-`settings.json.bak` before editing. Paths are resolved from `$HOME` at runtime,
-so nothing is hard-coded to a specific machine.
+Idempotent. If it finds a real file where a link belongs, it moves it to
+`~/.claude/backups/dotfiles-<date>/` first — it never overwrites anything.
 
 Then restart Claude Code and verify:
 
 ```
-/plugin        → postman@local  should be enabled
-/mcp           → the  postman  server should appear
+/plugin        → postman@local  enabled
+/mcp           → the  postman  server shows up
 /postman:setup → authenticate (OAuth recommended)
 ```
 
-## How it works
+## What is NOT versioned (important)
 
-1. Symlinks `marketplace.json` → `~/.claude/local-marketplace/.claude-plugin/marketplace.json`.
-2. Clones the plugin → `~/.claude/local-marketplace/postman-claude-code-plugin/` (if missing).
-3. Merges two keys into `~/.claude/settings.json`:
-   - `extraKnownMarketplaces.local` → points at `$HOME/.claude/local-marketplace` (type `directory`).
-   - `enabledPlugins."postman@local": true`.
+`~/.claude/` is not just configuration. These must never reach the repo:
 
-> ⚠️ For a local folder the marketplace `source` type must be `directory` with a
-> `path`. The `url` type fails validation (it requires a real URI, not a disk path).
+| Path                                          | What it is                    |
+| --------------------------------------------- | ----------------------------- |
+| `.credentials.json`, `anthropic_key.sh`       | **live tokens and API keys**  |
+| `history.jsonl`                               | everything you have typed     |
+| `projects/`, `sessions/`, `file-history/`     | transcripts and code          |
+| `cache/`, `debug/`, `paste-cache/`, `session-env/`, `shell-snapshots/` | runtime state |
+| `skills/synced/`                              | cloud-synced skills           |
 
-## Postman notes
+That is why files are linked **one by one** instead of linking all of
+`~/.claude`. The repo-root `.gitignore` blocks them as a second safety net.
 
-The plugin bundles this MCP server (`postman-claude-code-plugin/.mcp.json`):
+## Skills and agents
 
-```json
-{
-  "mcpServers": {
-    "postman": {
-      "type": "http",
-      "url": "https://mcp.postman.com/${POSTMAN_MCP_MODE:-mcp}"
-    }
-  }
-}
-```
+Both are linked individually, not as whole folders — `~/.claude/skills/` also
+holds `synced/`, managed by Claude Code itself, which must stay out of git.
 
-Optional env vars (add to `~/.zshrc`):
+- **Skill** → a folder with a `SKILL.md`; shows up as `/<name>`.
+  Start from `skills/skill-template/`.
+- **Agent** → a single `.md` file with frontmatter; a delegate subagent.
+  Start from `agents/agent-template.md`.
 
-| Variable           | Purpose                                                            |
-| ------------------ | ----------------------------------------------------------------- |
-| `POSTMAN_API_KEY`  | Auth via API key instead of OAuth (`PMAK-...`).                   |
-| `POSTMAN_MCP_MODE` | Server mode: `mcp` (default), `minimal` or `code` (fewer tokens). |
+For either one: copy the template, edit it, add its `link` line to
+`install.sh`, re-run the script, restart Claude Code. Each template documents
+its own format.
 
-## Add another plugin
+## Portability
+
+`settings.json` uses `~` instead of absolute paths; Claude Code expands it on
+read (verified on v2.1.59). The same file works on any machine, whatever the
+username.
+
+> ⚠️ Adding a marketplace from the UI (`/plugin`) makes Claude Code rewrite
+> `settings.json` and **normalize the path to an absolute one**. Since it is a
+> symlink, that lands in the repo: check `git diff` and put `~` back if a
+> `/home/<user>/...` shows up.
+
+> ⚠️ For a local folder the marketplace `source` must be type `directory` with a
+> `path`. Type `url` fails validation (it requires a real URI, not a disk path).
+
+## Adding another plugin
 
 1. Add an entry to the `plugins` array in `marketplace.json`
    (`name` = the one in its `plugin.json`, `source` = `./<folder>`).
-2. Add a clone line for it in `install.sh`.
-3. Add `"<name>@local": true` to the `jq` merge in `install.sh`.
+2. Add its clone line in `install.sh`.
+3. Add `"<name>@local": true` to `enabledPlugins` in `settings.json`.
 
 One `local` marketplace can host many plugins.
+
+## Statusline
+
+`statusline-command.sh` draws the bottom line (robbyrussell-style theme):
+directory, git branch, model, context usage (`ctx`) and usage of the current
+5-hour session window (`ses`). It receives a JSON payload on stdin
+(`workspace.current_dir`, `model.display_name`, `context_window.used_percentage`,
+`rate_limits.five_hour.used_percentage`, `session_id`, session cost, lines added
+or removed). Requires `jq`.
