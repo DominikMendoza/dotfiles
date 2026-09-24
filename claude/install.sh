@@ -54,11 +54,14 @@ mkdir -p "$CLAUDE_DIR"
 echo "▸ Linking config into ${CLAUDE_DIR/#$HOME/\~}"
 link settings.json          settings.json
 link statusline-command.sh  statusline-command.sh
+link CLAUDE.md              CLAUDE.md
 
 # Skills and agents are linked one by one, NOT as whole directories:
 # ~/.claude/skills/ also holds synced/ (cloud-synced skills) which must stay put.
 echo "▸ Linking skills and agents"
 link skills/skill-template  skills/skill-template
+link skills/plan-feature    skills/plan-feature
+link skills/test-plan       skills/test-plan
 link agents/agent-template.md  agents/agent-template.md
 # To add more: drop it in claude/skills|agents/ and add its line above.
 

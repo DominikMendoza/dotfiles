@@ -13,7 +13,10 @@ by hand.
 | ------------------------------- | ----------------------------------------------- |
 | `settings.json`                 | `~/.claude/settings.json`                       |
 | `statusline-command.sh`         | `~/.claude/statusline-command.sh`               |
+| `CLAUDE.md`                     | `~/.claude/CLAUDE.md`                           |
 | `skills/skill-template/`        | `~/.claude/skills/skill-template`               |
+| `skills/plan-feature/`          | `~/.claude/skills/plan-feature`                 |
+| `skills/test-plan/`             | `~/.claude/skills/test-plan`                    |
 | `agents/agent-template.md`      | `~/.claude/agents/agent-template.md`            |
 | `marketplace.json`              | `~/.claude/local-marketplace/.claude-plugin/`   |
 | `install.sh`                    | — (creates every link above)                    |
@@ -51,6 +54,13 @@ Then restart Claude Code and verify:
 
 That is why files are linked **one by one** instead of linking all of
 `~/.claude`. The repo-root `.gitignore` blocks them as a second safety net.
+
+## Conventions
+
+`CLAUDE.md` is user-scoped memory: Claude Code loads it in **every** session, in
+every project, with nothing to invoke. It holds how code must be written, naming,
+comments, javadoc, one type per file, and logging, so the skills below stay thin
+and only describe their workflow. No work repo is touched and no teammate sees it.
 
 ## Skills and agents
 
