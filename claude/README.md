@@ -17,6 +17,7 @@ by hand.
 | `skills/skill-template/`        | `~/.claude/skills/skill-template`               |
 | `skills/plan-feature/`          | `~/.claude/skills/plan-feature`                 |
 | `skills/test-plan/`             | `~/.claude/skills/test-plan`                    |
+| `skills/worktree/`              | `~/.claude/skills/worktree`                     |
 | `agents/agent-template.md`      | `~/.claude/agents/agent-template.md`            |
 | `marketplace.json`              | `~/.claude/local-marketplace/.claude-plugin/`   |
 | `install.sh`                    | — (creates every link above)                    |
