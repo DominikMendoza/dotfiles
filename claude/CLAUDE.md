@@ -2,6 +2,20 @@
 
 These apply to every project.
 
+## Git over the network
+
+`bb` is my alias that loads the Bitbucket ssh key. Every git command that reaches
+the network needs it: `fetch`, `push`, `pull`, `ls-remote`, `clone`.
+
+Chain it in the same command. Each command runs in a fresh shell, so the ssh
+agent that `bb` starts does not survive into the next one. Running `bb` alone and
+the git call afterwards fails, and the error reads like a permissions problem
+rather than a missing agent.
+
+```
+bb && git fetch origin staging
+```
+
 ## Branching from a card
 
 When I give you a card key such as `HAT-865`, settle the branch before anything
@@ -30,7 +44,7 @@ later `git push` either refuses or offers to push the work straight into
 it with `--set-upstream`.
 
 ```
-git fetch origin staging
+bb && git fetch origin staging
 git checkout -b HAT-865-fix-tracking-pixel --no-track origin/staging
 ```
 
@@ -48,6 +62,32 @@ half, and keep it readable.
 HAT-865-fix-tracking-pixel-order              32   ok
 HAT-865-fix-the-tracking-pixel-on-order-page  44   too long
 ```
+
+## Committing
+
+Do not commit on your own. When you finish changing files, end the reply with the
+command for me to run, and stop there. When I explicitly ask you to commit, run
+it, under the same rules.
+
+Stage by explicit path. Never `git add -A` and never `git add .`.
+
+```
+git add src/SaleAttribution.java src/SaleAttributionTest.java && git commit -m "AIR-1910: fix broken sale attribution test case"
+```
+
+The message is a single line: the card key, a colon, then what was done, in
+lowercase English, around 50 characters. This is not conventional commits, so no
+`feat`, `fix` or `chore` prefix. No body.
+
+Take the key from the current branch, which starts with it. When the branch
+carries no key, drop the prefix and keep the description alone.
+
+Never append an attribution line, to a commit or to a pull request description.
+No `Co-Authored-By`, no `Generated with`, and no tool name anywhere in the message
+or its body. My history has none and it stays that way.
+
+When a turn touched unrelated things, give one command per group instead of
+lumping everything into a single commit.
 
 ## Reviewing, diagnosing, answering
 
