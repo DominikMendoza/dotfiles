@@ -16,5 +16,6 @@
     }
   },
   "tui": "fullscreen",
-  "skipWorkflowUsageWarning": true
+  "skipWorkflowUsageWarning": true,
+  "cleanupPeriodDays": 7
 }
