@@ -63,6 +63,8 @@ link skills/skill-template  skills/skill-template
 link skills/plan-feature    skills/plan-feature
 link skills/test-plan       skills/test-plan
 link skills/worktree        skills/worktree
+link skills/handoff         skills/handoff
+link skills/postman-requests skills/postman-requests
 link agents/agent-template.md  agents/agent-template.md
 # To add more: drop it in claude/skills|agents/ and add its line above.
 
