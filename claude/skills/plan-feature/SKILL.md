@@ -25,3 +25,16 @@ Produce an implementation plan and stop there. Present it and wait for approval.
 The conventions in `~/.claude/CLAUDE.md` apply to everything the plan proposes,
 in particular the naming rules, the absence of comments, and the logging that
 each new implementation must carry.
+
+## Assertions
+
+Any test code the plan touches follows the repository's `.ai-pr-reviews` rule,
+and that includes a mechanical update made only to keep a test compiling. Every
+`assertTrue` carries a message that states the expected condition and its
+context: the ids, the inputs, or the actual value. The PR review flags an
+`assertTrue` without one as a `MUST`.
+
+```
+assertTrue(blacklist.automaticallyBlacklistedProviders().isEmpty(),
+    "The returned blacklist reflects the removal; got " + blacklist.automaticallyBlacklistedProviders());
+```
