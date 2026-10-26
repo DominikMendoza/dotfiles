@@ -18,8 +18,9 @@ by hand.
 | `skills/plan-feature/`          | `~/.claude/skills/plan-feature`                 |
 | `skills/test-plan/`             | `~/.claude/skills/test-plan`                    |
 | `skills/worktree/`              | `~/.claude/skills/worktree`                     |
-| `skills/handoff/`               | `~/.claude/skills/handoff`                      |
+| `skills/pr-qa-notes/`           | `~/.claude/skills/pr-qa-notes`                  |
 | `skills/postman-requests/`      | `~/.claude/skills/postman-requests`             |
+| `skills/newrelic-issue/`        | `~/.claude/skills/newrelic-issue`               |
 | `agents/agent-template.md`      | `~/.claude/agents/agent-template.md`            |
 | `marketplace.json`              | `~/.claude/local-marketplace/.claude-plugin/`   |
 | `install.sh`                    | — (creates every link above)                    |
