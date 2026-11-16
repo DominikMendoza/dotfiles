@@ -84,6 +84,10 @@ else
   git clone --depth 1 "$PLUGIN_REPO" "$PLUGIN_DIR"
 fi
 
+echo "▸ Installing the crontab of scheduled Claude tasks"
+crontab "$SCRIPT_DIR/scheduled/crontab"
+echo "  → crontab replaced with scheduled/crontab"
+
 # jq is not needed to install, but the statusline calls it on every refresh.
 command -v jq >/dev/null 2>&1 || echo "  ⚠ 'jq' missing: the statusline stays blank until you install it"
 
