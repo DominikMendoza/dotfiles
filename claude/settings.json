@@ -1,13 +1,16 @@
 {
   "cleanupPeriodDays": 7,
-  "diffSidebarOpen": false,
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
-    "postman@local": true
+    "postman@local": true,
+    "vercel@claude-plugins-official": true,
+    "hyros-db@hyros-devops": true,
+    "hyros-vpn@hyros-devops": true,
+    "ops-worklogs@local": true
   },
   "extraKnownMarketplaces": {
     "local": {
@@ -15,13 +18,20 @@
         "source": "directory",
         "path": "~/.claude/local-marketplace"
       }
+    },
+    "hyros-devops": {
+      "source": {
+        "source": "git",
+        "url": "git@bitbucket.org:markethero/hyros-devops.git"
+      }
+    }
+  },
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
     }
   },
   "tui": "fullscreen",
   "skipWorkflowUsageWarning": true,
-  "modelSettings": {
-    "claude-opus-5-5": {
-      "effortLevel": "high"
-    }
-  }
+  "diffSidebarOpen": false
 }
