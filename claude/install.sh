@@ -74,7 +74,6 @@ link agents/agent-template.md  agents/agent-template.md
 echo "▸ Setting up local marketplace at ${MARKET_DIR/#$HOME/\~}"
 mkdir -p "$MARKET_DIR/.claude-plugin"
 ln -sfn "$SCRIPT_DIR/marketplace.json" "$MARKET_DIR/.claude-plugin/marketplace.json"
-link plugins/ops-worklogs    local-marketplace/ops-worklogs
 
 # The plugin's own code is NOT versioned here: it is cloned on demand.
 if [ -d "$PLUGIN_DIR/.git" ]; then

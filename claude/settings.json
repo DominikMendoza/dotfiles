@@ -9,8 +9,7 @@
     "postman@local": true,
     "vercel@claude-plugins-official": true,
     "hyros-db@hyros-devops": true,
-    "hyros-vpn@hyros-devops": true,
-    "ops-worklogs@local": true
+    "hyros-vpn@hyros-devops": true
   },
   "extraKnownMarketplaces": {
     "local": {

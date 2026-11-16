@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "ops-worklogs": {
-      "type": "stdio",
-      "command": "uv",
-      "args": ["run", "--quiet", "--script", "${CLAUDE_PLUGIN_ROOT}/server/ops_worklogs_server.py"]
-    }
-  }
-}
