@@ -2,6 +2,7 @@
 name: fill-worklogs
 description: Fill the missing Ensolvers OPS worklogs of the current month from Jira progress, one card per day. Use when asked to fill, complete or catch up worklogs, work logs or hours in OPS, or to check which OPS days are missing.
 model: claude-haiku-5-5
+argument-hint: "[auto]"
 ---
 
 # Fill OPS worklogs from Jira
@@ -9,12 +10,17 @@ model: claude-haiku-5-5
 Talk to the user in their language. Nothing is written to OPS until the user
 approves the table in step 3.
 
+When the arguments include `auto`, nobody is there to answer: a scheduled job
+runs this skill. Never ask anything and never wait. Each step below says what
+to do in that mode.
+
 ## 1. Find the gaps
 
 Call `list_missing_workdays`.
 
 - `assignations` is empty: tell the user nothing is missing this month and stop.
-- More than one assignation: ask which one to fill and continue with that one only.
+- More than one assignation: ask which one to fill and continue with that one
+  only. With `auto`, fill nothing and report that there is more than one.
 - The length of `missingDates` differs from `missingDaysReportedByOps`: show both
   numbers under the table. OPS may count a day this tool cannot see.
 
@@ -95,6 +101,8 @@ Show one table and stop:
   - `no_card`: no Jira card, the user writes it
 
 Wait for the user's approval. Apply every edit they give, row by row.
+
+With `auto`, do not wait: every row that has a description counts as approved.
 
 ## 4. Create
 
