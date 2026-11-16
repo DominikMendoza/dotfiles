@@ -1,0 +1,8 @@
+{
+  "name": "ops-worklogs",
+  "version": "0.3.0",
+  "description": "Fills the missing Ensolvers OPS worklogs of the current month from Jira progress, one card per day.",
+  "author": {
+    "name": "Dominik"
+  }
+}

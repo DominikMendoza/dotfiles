@@ -8,6 +8,11 @@
       "name": "postman",
       "source": "./postman-claude-code-plugin",
       "description": "Full API lifecycle management for Claude Code. Powered by the Postman MCP Server."
+    },
+    {
+      "name": "ops-worklogs",
+      "source": "./ops-worklogs",
+      "description": "Fills the missing Ensolvers OPS worklogs of the current month from Jira progress, one card per day."
     }
   ]
 }
