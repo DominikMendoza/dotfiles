@@ -1,0 +1,2 @@
+class OpsApiError(Exception):
+    pass

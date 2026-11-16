@@ -1,0 +1,2 @@
+class TitleWriterError(Exception):
+    pass

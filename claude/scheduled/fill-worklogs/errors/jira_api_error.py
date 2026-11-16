@@ -1,0 +1,2 @@
+class JiraApiError(Exception):
+    pass
