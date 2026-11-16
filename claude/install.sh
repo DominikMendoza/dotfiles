@@ -67,6 +67,7 @@ link skills/pr-qa-notes     skills/pr-qa-notes
 link skills/postman-requests skills/postman-requests
 link skills/newrelic-issue   skills/newrelic-issue
 link skills/pr-review-comments skills/pr-review-comments
+link skills/devops-logs-url  skills/devops-logs-url
 link agents/agent-template.md  agents/agent-template.md
 # To add more: drop it in claude/skills|agents/ and add its line above.
 

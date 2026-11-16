@@ -21,6 +21,7 @@ by hand.
 | `skills/pr-qa-notes/`           | `~/.claude/skills/pr-qa-notes`                  |
 | `skills/postman-requests/`      | `~/.claude/skills/postman-requests`             |
 | `skills/newrelic-issue/`        | `~/.claude/skills/newrelic-issue`               |
+| `skills/devops-logs-url/`       | `~/.claude/skills/devops-logs-url`              |
 | `agents/agent-template.md`      | `~/.claude/agents/agent-template.md`            |
 | `marketplace.json`              | `~/.claude/local-marketplace/.claude-plugin/`   |
 | `install.sh`                    | — (creates every link above)                    |
